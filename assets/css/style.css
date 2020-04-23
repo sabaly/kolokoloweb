@@ -505,6 +505,11 @@ section {
   color: #fff;/*3498db*/
   font-size: 28px;
 }
+.what-we-do .icon-box .icon img {
+  background-color: #fff;/*3498db*/
+  width: 60%;
+  border-radius: 50%;
+}
 
 .what-we-do .icon-box h4 {
   font-weight: 700;
@@ -530,6 +535,9 @@ section {
 
 .what-we-do .icon-box:hover h4 a, .what-we-do .icon-box:hover .icon i {
   color: #3498db;
+}
+.what-we-do .icon-box:hover .icon img {
+  background-color: #3498db;/*3498db*/
 }
 
 /*--------------------------------------------------------------
