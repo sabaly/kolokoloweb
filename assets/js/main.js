@@ -187,7 +187,7 @@ function BasScrollButton() {
         color: "#fff"
       }, 1500, "easeInOutExpo");
     });
-    $('#downScroller span').slideUp(1500).fadeIn('slow');
+    $('#downScroller span').fadeToggle(1500).slideDown('slow');
     $('#kolo').fadeOut(1500).fadeIn(1500);
     BasScrollButton();
   }, 4000);
