@@ -1,10 +1,3 @@
-/**
-* Template Name: Lumia - v2.0.0
-* Template URL: https://bootstrapmade.com/lumia-bootstrap-business-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -55,6 +48,13 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
+@media (max-width: 768px) {
+  .back-to-top {
+    right: 90px;
+  }
+}
+
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -85,6 +85,11 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 40px;
 }
 
+@media (max-width: 768px) {
+  #header .logo h1 {
+    font-size: 18px;
+  }
+}
 /*--------------------------------------------------------------
 # Header Social Links
 --------------------------------------------------------------*/
@@ -99,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
 .header-social-links a:hover {
   color: #fff;
 }
-
+/*
 @media (max-width: 768px) {
   .header-social-links {
     padding-right: 48px;
@@ -108,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 6px;
   }
 }
-
+*/
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -150,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
   visibility: hidden;
   padding: 10px 0;
-  background: #fff;
+  background: #00f;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: ease all 0.3s;
 }
@@ -170,12 +175,12 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px 20px;
   font-size: 14px;
   text-transform: none;
-  color: #21262a;
+  color: #fff;
   font-weight: 400;
 }
 
 .nav-menu .drop-down ul a:hover, .nav-menu .drop-down ul .active > a, .nav-menu .drop-down ul li:hover > a {
-  color: #3498db;
+  color : rgba(255,255,255,0.7);
 }
 
 .nav-menu .drop-down > a:after {
@@ -235,13 +240,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-nav-toggle i {
-  color: #384046;
+  color: #fff;/*384046*/
 }
 
 .mobile-nav {
   position: fixed;
   top: 55px;
-  right: 15px;
+  right: 50px;
   bottom: 15px;
   left: 15px;
   z-index: 9999;
@@ -270,7 +275,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-nav a:hover, .mobile-nav .active > a, .mobile-nav li:hover > a {
-  color: #3498db;
+  color: #00f;
   text-decoration: none;
 }
 
@@ -323,6 +328,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .mobile-nav-active .mobile-nav-toggle i {
   color: #fff;
+}
+/*-----
+  j'ai ajouter ceci pour que le menu soit visible au niveau mobile 
+------*/
+@media (max-width: 768px) {
+  .mobile-nav-toggle {
+    right: 90px;
+  }
 }
 
 /*--------------------------------------------------------------

@@ -1,9 +1,3 @@
-/**
-* Template Name: Lumia - v2.0.0
-* Template URL: https://bootstrapmade.com/lumia-bootstrap-business-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 !(function($) {
   "use strict";
 
@@ -48,7 +42,7 @@
     }
   });
 
-  //Scroll vers le bas, reduction de la hauteur de la bannière
+  //Scroll vers le bas, animation de la flêche au niveau de la bannière
   BasScrollButton();
 
   // Mobile Navigation
@@ -178,6 +172,9 @@
 
 })(jQuery);
 
+/*
+  Animation de la flêche vers le haut de la baniière
+*/
 function BasScrollButton() {
   setTimeout(function() {
     $("#downScroller, #downScroller i").animate({
