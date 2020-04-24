@@ -1,2 +1,2 @@
-Fully working PHP/AJAX contact form script is available in the pro version of the template.
-You can buy it from: https://bootstrapmade.com/lumia-bootstrap-business-template/
+'Contact.php' récupère les informations saisies par le client au niveau du formulaire de contact. il contruit l'email et l'envoie grâce à 'emailForm.php'.
+
