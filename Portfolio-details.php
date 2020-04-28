@@ -1,4 +1,17 @@
+<?php
+  require 'PortfolioDetailManager/autoload.class.php';
 
+  $db = DBFactory::getMysqlConnexionWithPDO();
+  $manager = new PortfoliosManager_PDO($db);
+
+  if(isset($_GET['id']))
+  {
+    $portfolio = $manager->getUnique((int) $_GET['id']);
+  }else {
+    $portfolio = $manager->getUnique(2);
+  }
+  $portfolios = $manager->getList();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,27 +115,22 @@
       <div class="container" data-aos="zoom-in" data-aos-duration="2000">
 
         <div class="portfolio-details-container">
-
-          <div class="owl-carousel portfolio-details-carousel owl-dot">
-            <img src="assets/img/logo-kolokolo.png" class="img-fluid" alt="">
-            <img src="assets/img/portfolio-details-2.jpg" class="img-fluid" alt="">
-            <img src="assets/img/portfolio-details-3.jpg" class="img-fluid" alt="">
-          </div>
+          <img src="assets/img/portfolio-details/<?php echo $portfolio->image(); ?>" class="img-fluid" alt="">
 
           <div class="portfolio-info" data-aos="flip-down" data-aos-duration="1500">
             <h3>Project information</h3>
             <ul>
-              <li><strong>Category</strong>: Web design</li>
-              <li><strong>Client</strong>: ASU Company</li>
-              <li><strong>Date</strong>: 01 March, 2020</li>
-              <li><strong>URL</strong>: <a href="#">www.example.com</a></li>
+              <li><strong>Categorie</strong>: <?php echo$portfolio->categorie(); ?></li>
+              <li><strong>Client</strong>: <?php echo $portfolio->client(); ?></li>
+              <li><strong>Date</strong>: <?php echo $portfolio->dateAjout()->format('d/m/Y à H\hi'); ?></li>
+              <li><strong>URL</strong>: <a href="<?php echo $portfolio->url(); ?>"><?php echo $portfolio->url(); ?></a></li>
             </ul>
           </div>
 
         </div>
 
         <div class="portfolio-description" data-aos="zoom-in-right" data-aos-duration="1500">
-          <h2>This is an example of portfolio detail</h2>
+          <h2><?php echo $portfolio->titre(); ?></h2>
           <p>
             Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
           </p>
@@ -153,85 +161,38 @@
 
         <div class="row portfolio-container">
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp" data-aos="zoom-in" data-aos-duration="2000">
-            <div class="portfolio-wrap">
-              <figure>
-                <img src="assets/img/portfolio/logo-kolokolo.png" class="img-fluid" alt="">
-                <a href="assets/img/portfolio/logo-kolokolo.png" data-gall="portfolioGallery" class="link-preview venobox" title="Preview"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" class="link-details" title="More Details"><i class="bx bx-link"></i></a>
-              </figure>
+          <?php
+          foreach ($portfolios as $element) 
+          {
+            if(strstr($element->categorie(), 'Web'))
+            {
+              $filter = 'filter-web';
+            }else if(strstr($element->categorie(), 'Logo'))
+            {
+              $filter = 'filter-card';
+            }else {
+              $filter = 'filter-app';
+            }
+          ?>
+            <div class="col-lg-4 col-md-6 portfolio-item <?php echo $filter; ?> wow fadeInUp">
+              <div class="portfolio-wrap">
+                <figure>
+                  <img src="assets/img/portfolio/<?php echo $element->image();?>" class="img-fluid" alt="">
+                  <a href="assets/img/portfolio/<?php echo $element->image();?>" data-gall="portfolioGallery" class="link-preview venobox" title="Voir"><i class="bx bx-plus"></i></a>
+                  <a href="portfolio-details.php?id=<?php echo $element->id(); ?>" class="link-details" title="Details"><i class="bx bx-link"></i></a>
+                </figure>
 
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html">Kolokolo</a></h4>
-                <p>LOGO</p>
+                <div class="portfolio-info">
+                  <h4><a href="portfolio-details.php"><?php echo $element->client();?></a></h4>
+                  <p><?php echo $element->categorie();?></p>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web wow fadeInUp" data-wow-delay="0.1s" data-aos="zoom-in" data-aos-duration="2000">
-            <div class="portfolio-wrap">
-              <figure>
-                <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-                <a href="assets/img/portfolio/portfolio-2.jpg" class="link-preview venobox" data-gall="portfolioGallery" title="Preview"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" class="link-details" title="More Details"><i class="bx bx-link"></i></a>
-              </figure>
-
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html">Web 3</a></h4>
-                <p>Web</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp" data-wow-delay="0.2s" data-aos="zoom-in" data-aos-duration="2000">
-            <div class="portfolio-wrap">
-              <figure>
-                <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-                <a href="assets/img/portfolio/portfolio-3.jpg" class="link-preview venobox" data-gall="portfolioGallery" title="Preview"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" class="link-details" title="More Details"><i class="bx bx-link"></i></a>
-              </figure>
-
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html">App 2</a></h4>
-                <p>App</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
+          <?php
+          }
+          ?>
       </div>
     </section><!-- End Portfolio Section -->
-
-    <!-- ======= Portfolio elements ======= -->
-    <!--section id="galerie" class="galerie">
-
-
-        <div class="section-title">
-          <h2>Galerie</h2>
-        </div>
-
-      <div class="container" data-aos="zoom-in" data-aos-duration="2000">
-        <div id="portfolioElements" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#indicator0" data-slide-to="0" class="active"></li>
-            <li data-target="#indicator1" data-slide-to="1"></li>
-            <li data-target="#indicator2" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="assets/img/logo-kolokolo.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/portfolio-details-2.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/portfolio-details-3.jpg" class="d-block w-100" alt="...">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section--><!-- End elements -->
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
