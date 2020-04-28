@@ -1,5 +1,5 @@
 <?php
-  require 'PortfolioDetailManager/autoload.class.php';
+  require 'Manager/autoload.class.php';
 
   $db = DBFactory::getMysqlConnexionWithPDO();
   $manager = new PortfoliosManager_PDO($db);
@@ -8,7 +8,7 @@
   {
     $portfolio = $manager->getUnique((int) $_GET['id']);
   }else {
-    $portfolio = $manager->getUnique(2);
+    $portfolio = $manager->getUnique(1);
   }
   $portfolios = $manager->getList();
 ?>
@@ -120,7 +120,7 @@
           <div class="portfolio-info" data-aos="flip-down" data-aos-duration="1500">
             <h3>Project information</h3>
             <ul>
-              <li><strong>Categorie</strong>: <?php echo$portfolio->categorie(); ?></li>
+              <li><strong>Categorie</strong>: <?php echo $portfolio->categorie(); ?></li>
               <li><strong>Client</strong>: <?php echo $portfolio->client(); ?></li>
               <li><strong>Date</strong>: <?php echo $portfolio->dateAjout()->format('d/m/Y à H\hi'); ?></li>
               <li><strong>URL</strong>: <a href="<?php echo $portfolio->url(); ?>"><?php echo $portfolio->url(); ?></a></li>
@@ -132,7 +132,7 @@
         <div class="portfolio-description" data-aos="zoom-in-right" data-aos-duration="1500">
           <h2><?php echo $portfolio->titre(); ?></h2>
           <p>
-            Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+            <?php echo $portfolio->contenu(); ?>
           </p>
         </div>
 

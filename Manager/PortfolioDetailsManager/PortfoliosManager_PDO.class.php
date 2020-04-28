@@ -25,7 +25,7 @@ class PortfoliosManager_PDO extends PortfolioDetailsManager
 	*/
 	protected function add(Portfolio $portfolios)
 	{
-		$requete = $this->db->prepare('INSERT INTO portfolio(categorie, client, url, dateAjout, titre, contenu, image, dateModif)
+		$requete = $this->db->prepare('INSERT INTO kk_portfolio(categorie, client, url, dateAjout, titre, contenu, image, dateModif)
 		VALUES(:categorie, :client, :url, NOW(), :titre, :contenu, :image, NOW())');
 		$requete->bindValue(':categorie', $portfolios->categorie());
 		$requete->bindValue(':client', $portfolios->client());
@@ -41,7 +41,7 @@ class PortfoliosManager_PDO extends PortfolioDetailsManager
 	*/
 	public function count()
 	{
-		return $this->db->query('SELECT COUNT(*) FROM portfolio')->fetchColumn();
+		return $this->db->query('SELECT COUNT(*) FROM kk_portfolio')->fetchColumn();
 	}
 
 	/**
@@ -49,7 +49,7 @@ class PortfoliosManager_PDO extends PortfolioDetailsManager
 	*/
 	public function delete($id)
 	{
-		$this->db->exec('DELETE FROM portfolio WHERE id = '.(int) $id);
+		$this->db->exec('DELETE FROM kk_portfolio WHERE id = '.(int) $id);
 	}
 
 	/**
@@ -57,7 +57,7 @@ class PortfoliosManager_PDO extends PortfolioDetailsManager
 	*/
 	public function getList($debut = -1, $limite = -1)
 	{
-		$sql = 'SELECT id, categorie, client, url, dateAjout, titre, contenu, image, dateModif FROM portfolio ORDER BY id DESC';
+		$sql = 'SELECT id, categorie, client, url, dateAjout, titre, contenu, image, dateModif FROM kk_portfolio ORDER BY id DESC';
 
 		// On vérifie l'intégrité des paramètres fournis.
 		if ($debut != -1 || $limite != -1)
@@ -86,7 +86,7 @@ class PortfoliosManager_PDO extends PortfolioDetailsManager
 	*/
 	public function getUnique($id)
 	{
-		$requete = $this->db->prepare('SELECT id, categorie, client, url, dateAjout, titre, contenu, image, dateModif FROM portfolio
+		$requete = $this->db->prepare('SELECT id, categorie, client, url, dateAjout, titre, contenu, image, dateModif FROM kk_portfolio
 		WHERE id = :id');
 
 		$requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
@@ -94,9 +94,11 @@ class PortfoliosManager_PDO extends PortfolioDetailsManager
 
 		$requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Portfolio');
 		$portfolios = $requete->fetch();
-		$portfolios->setDateAjout(new DateTime($portfolios->dateAjout()));
-		$portfolios->setDateModif(new DateTime($portfolios->dateModif()));
-
+		if($portfolios!=null)
+		{
+			$portfolios->setDateAjout(new DateTime($portfolios->dateAjout()));
+			$portfolios->setDateModif(new DateTime($portfolios->dateModif()));
+		}
 		return $portfolios;
 	}
 
@@ -105,7 +107,7 @@ class PortfoliosManager_PDO extends PortfolioDetailsManager
 	*/
 	protected function update(Portfolio $portfolio)
 	{
-		$requete = $this->db->prepare('UPDATE portfolio SET categorie = :categorie, client = :client,url = :url, dateAjout = NOW(), titre = :titre, contenu = :contenu, image = :image, dateModif = NOW() WHERE id = :id');
+		$requete = $this->db->prepare('UPDATE kk_portfolio SET categorie = :categorie, client = :client,url = :url, dateAjout = NOW(), titre = :titre, contenu = :contenu, image = :image, dateModif = NOW() WHERE id = :id');
 
 		$requete->bindValue(':categorie', $portfolio->categorie());
 		$requete->bindValue(':client', $portfolio->client());

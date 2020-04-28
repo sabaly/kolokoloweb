@@ -1,4 +1,10 @@
 <?php
+	session_start();
+	if(!isset($_SESSION['user']))
+	{
+		header('Location: UsersManager/login.php');
+	}
+
 	require 'autoload.class.php';
 
 	$db = DBFactory::getMysqlConnexionWithPDO();
@@ -44,6 +50,8 @@
 		}
 
 	}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,6 +100,7 @@
       <div class="header-social-links">
         <a href="../Portfolio-details.php"><i class="icofont-eye" title="voirs les enregistrements"></i></a>
         <a href="../index.html"><i class="icofont-home" title="Site"></i></a>
+        <a href="UsersManager/login.php?disconnect=1"><i>Deconnexion</i></a>
       </div>
 
     </div>
@@ -102,7 +111,7 @@
   	<section id="formulaire" class="formulaire">
 
       <div class="container" data-aos="zoom-in" data-aos-duration="2000">
-		<form action="admin.php" method="post" enctype="multipart/form-data" role="form" class="php-email-form">
+		<form action="admin.php" method="post" enctype="multipart/form-data">
 		<p style="text-align: center">
 <?php
 	if (isset($message))
@@ -160,13 +169,13 @@
 	{
 ?>
 		<input type="hidden" name="id" value="<?= $portfolios->id() ?>" class="btn"/>
-		<div class="text-center"><button type="submit">Modifier</button></div>
+		<div class="text-center"><input type="submit" name="modifier" value="Modifier"/></div>
 <?php
 	}
 	else
 	{
 ?>
-		<div class="text-center"><button type="submit">Ajouter</button></div>
+		<div class="text-center"><input type="submit" name="ajouter" value="Ajouter" ></div>
 <?php
 	}
 ?>
@@ -185,7 +194,7 @@
 			</div>
 
 		<table class="table">
-			<thead>
+			<thead style="background-color: #00f; color: #fff;">
 				<tr>
 					<th scope="col">Catégorie</th>
 					<th scope="col">Client</th>
